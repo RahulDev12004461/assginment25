@@ -1,0 +1,137 @@
+Name:Rahul Dev
+
+//Q1
+#include<iostream>
+#include<string>
+#include<fstream>
+using namespace std;
+class student
+{
+	public:
+		string name;
+		int age;
+		double grade;
+		
+		student(string a,int b, double c)
+		{
+			name=a;
+			age=b;
+			grade=c;
+		}
+};
+int main()
+{
+	student s("abc",21,92.04);
+	fstream file;
+	file.open("abc",ios::out);
+	file<<s.name<<" "<<s.age<<" "<<s.grade;
+}
+
+
+
+//Q2
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main()
+{
+	fstream file;
+	string s;
+	file.open("abc",ios::in);
+	while(file>>s)
+	{
+		cout<<s<<" ";
+	}
+	file.close();
+}
+
+#include<iostream>
+#include<string>
+#include<fstream>
+using namespace std;
+class book
+{
+	public:
+		string title;
+		string author;
+		string isbn;
+		double price;
+		int stock;
+		void getdetails()
+		{
+			cout<<"enter title\n";
+			getline(cin,title);
+			cout<<"enter author\n";
+			getline(cin,author);
+			cout<<"enter isbn\n";
+			getline(cin,isbn);
+			cout<<"enter price\n";
+			cin>>price;
+			cout<<"enter stock\n";
+			cin>>stock;
+		}
+};
+int main()
+{
+	book b;
+	b.getdetails();
+	fstream file;
+	file.open("book",ios::out|ios::binary);
+	file.write((char*)&b, sizeof(b));
+    file.close();
+	
+}
+
+
+//Q4
+#include <iostream>
+#include <fstream>
+using namespace std;
+class book
+{
+	public:
+		string title;
+		string author;
+		string isbn;
+		double price;
+		int stock;
+		void getdetails()
+		{
+			cout<<"enter title\n";
+			getline(cin,title);
+			cout<<"enter author\n";
+			getline(cin,author);
+			cout<<"enter isbn\n";
+			getline(cin,isbn);
+			cout<<"enter price\n";
+			cin>>price;
+			cout<<"enter stock\n";
+			cin>>stock;
+		}
+};
+
+
+int main() 
+{
+	book b;
+    ifstream inFile;
+    inFile.open("book", ios::binary);
+
+    if (!inFile) {
+        cout << "Error opening file" << endl;
+        return 1;
+    }
+
+    while (inFile.read((char*)&b, sizeof(b))) {
+        cout << "Title: " << b.title << endl;
+        cout << "Author: " << b.author << endl;
+        cout << "ISBN: " << b.isbn << endl;
+        cout << "Price: " << b.price << endl;
+        cout << "Stock: " << b.stock << endl;
+        cout << endl;
+    }
+
+    inFile.close();
+
+    return 0;
+}
